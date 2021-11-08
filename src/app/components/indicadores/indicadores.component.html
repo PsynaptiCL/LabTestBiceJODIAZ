@@ -1,0 +1,50 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Indicador</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Unidad</th>
+            <th scope="col">Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let indicador of indicadores;">
+            <td>{{indicador.key}}</td>
+            <td>{{indicador.date * 1000 | date : 'longDate' }}</td>
+            <td>{{indicador.unit}}</td>
+            <td>{{indicador.value }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <select class="form-select" aria-label="Selecciona indicador" name="indicadorSlc" #indicadorSlc>
+                    <option *ngFor="let key of indValues;" [value]="key">{{key}}</option>
+                  </select>
+        </div>
+        <div class="col-sm-4">
+            <input type="date" id="start" name="trip-start" #fechaIndicador min="2019-01-01" max="2020-12-31">
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-success" (click)="selectIndicador(indicadorSlc.value, fechaIndicador.value)">consultar</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container fixed-top">
+    <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="flag">
+        <strong class="alert-heading">{{nombre}}</strong> {{fecha}} {{valor}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlertInfo()"></button>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="flagError">
+        <strong>
+           La fecha solicitada no se encuentra con información
+        </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlertWarning()"></button>
+    </div>
+
+</div>

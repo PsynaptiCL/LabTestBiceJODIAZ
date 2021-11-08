@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+        "target": "https://indecon.site/",
+        "secure": false,
+        "logLevel": "debug"
+
+    }
+}
